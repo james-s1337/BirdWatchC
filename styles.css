@@ -1,5 +1,6 @@
+/* Global style variables */
+/* 1rem = 16px, 1vw = 1% of viewport width, 1vh = 1% of viewport height */
 :root {
-    color-scheme: light;
     --color-ink: #1e2924;
     --color-muted: #66736c;
     --color-paper: #f7f8f3;
@@ -10,7 +11,7 @@
     --color-gold: #d5a94e;
     --color-line: #e1e6dd;
     --content-width: 1160px;
-    --page-gutter: clamp(1.25rem, 5vw, 4rem);
+    --page-gutter: clamp(1.25rem, 5vw, 4rem); /* adaptable screen padding */
     --font-body: "Segoe UI", "Helvetica Neue", sans-serif;
     --font-display: Georgia, "Times New Roman", serif;
 }
@@ -18,65 +19,63 @@
 *,
 *::before,
 *::after {
-    box-sizing: border-box;
+    box-sizing: border-box; /* include padding and border in element's total width and height for all elements */
 }
 
 html {
-    scroll-behavior: smooth;
+    scroll-behavior: smooth; /* smooth scrolling for anchor links instead of just teleporting there */
     scroll-padding-top: 5rem;
 }
 
 body {
     min-width: 320px;
     margin: 0;
-    overflow-x: clip;
+    overflow-x: clip; /* prevent horizontal scrolling on small screens */
     background: var(--color-paper);
     color: var(--color-ink);
     font-family: var(--font-body);
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
+    line-height: 1.6; /* more space in between text lines for better readability */
 }
 
 img {
-    display: block;
-    max-width: 100%;
+    display: block; 
+    max-width: 100%; /* ensure images don't exceed their container */
 }
 
 a {
     color: inherit;
 }
 
+/* tab focus styling for accessibility */
 a:focus-visible {
     outline: 3px solid var(--color-gold);
     outline-offset: 4px;
 }
 
 header {
-    position: relative;
-    z-index: 1;
     display: flex;
-    min-height: 5rem;
-    align-items: center;
+    min-height: 5rem; /* height can stay flexible while still having a minimum height for the header */
+    align-items: center; /* center items vertically */
     justify-content: space-between;
     gap: 1.5rem;
-    padding: 0 var(--page-gutter);
+    padding: 0 var(--page-gutter); /* x-axis padding for the header */
     border-bottom: 1px solid rgb(30 41 36 / 8%);
     background: var(--color-paper);
 }
 
 header > h1 {
-    flex: 0 0 auto;
+    flex: 0 0 auto; /* header does not grow or shrink, and takes up only as much space as it needs */
     margin: 0;
     color: var(--color-forest);
     font-family: var(--font-display);
     font-size: 1.7rem;
     font-weight: 700;
-    letter-spacing: -0.06em;
+    letter-spacing: -0.06em; /* tighter spacing for a more compact look */
 }
 
 header > h1 span,
 .footer-logo span {
-    color: var(--color-leaf);
+    color: var(--color-leaf); /* color for the accent part of the logo */
 }
 
 nav ul,
@@ -84,10 +83,10 @@ nav ul,
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: clamp(1rem, 3vw, 2.25rem);
+    gap: clamp(1rem, 3vw, 2.25rem); /* adaptable spacing between nav links */
     margin: 0;
     padding: 0;
-    list-style: none;
+    list-style: none; /* remove point markers from the list */
 }
 
 nav a {
@@ -97,7 +96,7 @@ nav a {
     font-size: 0.9rem;
     font-weight: 600;
     text-decoration: none;
-    transition: color 160ms ease;
+    transition: color 160ms ease; /* transtion for color change on hover */
 }
 
 nav a:hover,
@@ -121,6 +120,7 @@ nav a:hover,
         url("images/bird-home.jpg") center 47% / cover no-repeat;
 }
 
+/* faint circle design without any added html elements, purely decorative */
 .hero::after {
     position: absolute;
     right: -5rem;
@@ -166,19 +166,22 @@ nav a:hover,
     font-size: clamp(1rem, 1.7vw, 1.15rem);
 }
 
+/*
 .hero-credit {
     margin-top: 1rem;
     color: var(--color-muted);
     font-size: 0.75rem;
 }
 
+
 .hero-credit a {
     text-decoration-color: currentColor;
     text-underline-offset: 2px;
 }
+*/
 
 .btn {
-    display: inline-flex;
+    display: inline-flex; /* flex alongside text for better alignment */
     min-height: 3.25rem;
     align-items: center;
     justify-content: center;
@@ -218,7 +221,7 @@ nav a:hover,
 
 .gallery-grid {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(2, minmax(0, 1fr)); /* two columns of equal width, but can shrink to fit smaller screens */
     gap: clamp(1.25rem, 3vw, 2rem);
 }
 
@@ -231,7 +234,7 @@ nav a:hover,
 .bird-image {
     width: 100%;
     aspect-ratio: 4 / 3;
-    object-fit: cover;
+    object-fit: cover; /* ensures the image fills the container while maintaining its aspect ratio */
     object-position: center;
     background: var(--color-moss);
     transition: transform 350ms ease;
@@ -255,6 +258,7 @@ nav a:hover,
     font-size: 0.9rem;
 }
 
+/*
 .bird-card .photo-credit {
     margin-top: -0.75rem;
     color: #78847b;
@@ -271,6 +275,7 @@ nav a:hover,
 .hero-credit a:hover {
     color: var(--color-forest);
 }
+*/
 
 .about {
     width: 100%;
@@ -290,18 +295,19 @@ nav a:hover,
     box-shadow: 0 1.25rem 3.5rem rgb(30 41 36 / 10%);
 }
 
-.about-copy {
+.about-desc {
     align-self: center;
     padding: clamp(2rem, 5vw, 4rem);
 }
 
+/* styling for professional labels of the photographer */
 .about-eyebrow {
     margin: 0 0 0.75rem;
     color: var(--color-leaf);
     font-size: 0.75rem;
     font-weight: 700;
     letter-spacing: 0.14em;
-    text-transform: uppercase;
+    text-transform: uppercase; /* all caps for a professional look */
 }
 
 .about h2 {
@@ -314,7 +320,7 @@ nav a:hover,
     line-height: 1.15;
 }
 
-.about-copy > p:last-child {
+.about-desc > p:last-child {
     max-width: 38rem;
     margin: 0;
     color: #435349;
@@ -332,9 +338,7 @@ nav a:hover,
 
 .contact-form {
     padding: clamp(4rem, 8vw, 6.5rem) var(--page-gutter);
-    background:
-        radial-gradient(ellipse at 100% 0%, rgb(102 132 90 / 12%), transparent 30rem),
-        var(--color-paper);
+    background: var(--color-paper);
 }
 
 .contact-form-content {
@@ -377,7 +381,7 @@ nav a:hover,
 }
 
 .form-field-message {
-    grid-column: 1 / -1;
+    grid-column: 1 / -1; /* stretch across all columns in the grid */
 }
 
 .form-field label {
@@ -419,7 +423,7 @@ nav a:hover,
 .contact-form-note {
     margin: 1rem 0 0;
     font-size: 0.82rem;
-    overflow-wrap: anywhere;
+    overflow-wrap: anywhere; /* allow text to break anywhere to prevent overflow on small screens */
 }
 
 .contact-form-note a {
@@ -436,7 +440,7 @@ footer {
 .footer-grid {
     display: grid;
     width: min(100%, var(--content-width));
-    grid-template-columns: 1.2fr 0.8fr 1fr;
+    grid-template-columns: 1.2fr 0.8fr 1fr; /* three columns of different widths for branding, links, and contact info, fr to divide the available space */
     gap: 2rem;
     margin: 0 auto 3rem;
 }
@@ -471,7 +475,7 @@ footer {
 }
 
 .footer-links ul {
-    align-items: flex-start;
+    align-items: flex-start; /* align links towards the left */
     flex-direction: column;
     gap: 0.35rem;
 }
@@ -494,6 +498,7 @@ footer > p {
     text-align: center;
 }
 
+/* only applies with screens that are 680px wide or smaller, for mobile responsiveness */
 @media (max-width: 680px) {
     header {
         align-items: flex-start;
@@ -554,6 +559,7 @@ footer > p {
     }
 }
 
+/* only applies with screens that are 420px wide or smaller, for mobile responsiveness */
 @media (max-width: 420px) {
     nav ul {
         column-gap: 1rem;
@@ -568,6 +574,7 @@ footer > p {
     }
 }
 
+/* disables scroll transition when clicking on nav link to prevent motion sickness for users who prefer reduced motion */
 @media (prefers-reduced-motion: reduce) {
     *,
     *::before,
