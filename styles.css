@@ -10,7 +10,7 @@
     --color-moss: #dce5d4;
     --color-gold: #d5a94e;
     --color-line: #e1e6dd;
-    --content-width: 1160px;
+    --content-width: 1160px; /* maximum width for content to prevent it from stretching too far on large screens */
     --page-gutter: clamp(1.25rem, 5vw, 4rem); /* adaptable screen padding */
     --font-body: "Segoe UI", "Helvetica Neue", sans-serif;
     --font-display: Georgia, "Times New Roman", serif;
