@@ -26,5 +26,33 @@ export const birds = [
         alt: "A Great Blue Heron standing in shallow water",
         category: "waterfowl",
         image: "/images/birds/greatblueheron.jpg"
+    },
+    {
+        name: "Bald Eagle",
+        location: "Riverside Trail",
+        alt: "A Bald Eagle perched on a tree branch",
+        category: "birds of prey",
+        image: "/images/birds/baldeagle.jpg"
+    },
+    {
+        name: "Emu",
+        location: "Meadowview Reserve",
+        alt: "An Emu standing in a grassy field",
+        category: "flightless",
+        image: "/images/birds/emu.jpg"
+    },
+    {
+        name: "Macaw",
+        location: "Tropical Bird Sanctuary",
+        alt: "A colorful Macaw perched on a branch",
+        category: "tropical",
+        image: "/images/birds/macaw.jpg"
+    },
+    {
+        name: "Ring-billed Gull",
+        location: "Riverside Trail",
+        alt: "A Ring-billed Gull standing near the water",
+        category: "shorebirds",
+        image: "/images/birds/ringbilledgull.jpg"
     }
 ];
