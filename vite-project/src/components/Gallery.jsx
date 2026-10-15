@@ -27,7 +27,7 @@ export function Gallery(){
                     </button>
                 ))}
             </div>
-            <div className="grid grid-cols-2 gap-[clamp(1.25rem,3vw,2rem)] max-[680px]:grid-cols-1">
+            <div className="grid grid-cols-1 gap-[clamp(1.25rem,3vw,2rem)] md:grid-cols-2">
                 {filteredBirds.map((bird, index) => (
                     <BirdCard
                         key={index}

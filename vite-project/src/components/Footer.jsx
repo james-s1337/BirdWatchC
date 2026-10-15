@@ -2,9 +2,9 @@ export function Footer() {
     return (
         <footer id="contact" className="bg-[#1d3027] px-page-gutter pt-14 pb-6 text-[#e9eee8]">
 
-            <div className="mx-auto mb-12 grid w-full max-w-content grid-cols-[1.2fr_.8fr_1fr] gap-8 max-[680px]:grid-cols-2 max-[680px]:gap-x-5 max-[680px]:gap-y-8 max-[420px]:grid-cols-1">
+            <div className="mx-auto mb-12 grid w-full max-w-content grid-cols-1 gap-x-5 gap-y-8 sm:grid-cols-2 md:grid-cols-[1.2fr_.8fr_1fr] md:gap-8">
 
-                <div className="max-[680px]:col-span-full max-[420px]:col-auto">
+                <div className="col-auto sm:col-span-full md:col-auto">
                     <p className="mb-1 font-display text-[1.75rem] font-bold tracking-[-.05em] text-white">Bird <span className="text-[#a8c08f]">Watch</span></p>
                     <p className="mb-[.6rem] mt-0 text-[.9rem] text-[#c1cdc3] [overflow-wrap:anywhere]">Your Local Bird Photography Hub</p>
                 </div>

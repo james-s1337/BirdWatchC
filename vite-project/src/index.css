@@ -14,6 +14,8 @@
   --font-display: Georgia, "Times New Roman", serif;
   --spacing-page-gutter: clamp(1.25rem, 5vw, 4rem);
   --container-content: 1160px;
+  --breakpoint-sm: 421px;
+  --breakpoint-md: 681px;
 }
 
 @layer base {

@@ -42,7 +42,7 @@ export const birds = [
         image: "/images/birds/emu.jpg"
     },
     {
-        name: "Macaw",
+        name: "Hyacinth Macaw",
         location: "Tropical Bird Sanctuary",
         alt: "A colorful Macaw perched on a branch",
         category: "tropical",
@@ -50,7 +50,7 @@ export const birds = [
     },
     {
         name: "Ring-billed Gull",
-        location: "Riverside Trail",
+        location: "Sandy Shores",
         alt: "A Ring-billed Gull standing near the water",
         category: "shorebirds",
         image: "/images/birds/ringbilledgull.jpg"
