@@ -1,12 +1,11 @@
 "use client";
 
 import { useState } from 'react'
-import { birds } from '../data/birds'
 import { BirdCard } from './BirdCard'
 
 const categories = ['all', 'songbirds', 'waterfowl', 'shorebirds', "birds of prey", 'tropical', 'flightless']
 
-export function Gallery(){
+export function Gallery({ birds }){
     const [filter, setFilter] = useState('all')
     const filteredBirds = filter === 'all' ? birds : birds.filter(bird => bird.category === filter)
     return (
@@ -30,9 +29,9 @@ export function Gallery(){
                 ))}
             </div>
             <div className="grid grid-cols-1 gap-[clamp(1.25rem,3vw,2rem)] md:grid-cols-2">
-                {filteredBirds.map((bird, index) => (
+                {filteredBirds.map((bird) => (
                     <BirdCard
-                        key={index}
+                        key={bird.id}
                         imageSrc={bird.image}
                         altText={bird.alt}
                         birdName={bird.name}

@@ -5,12 +5,12 @@ import { About } from './components/About'
 import { ContactForm } from './components/ContactForm'
 import { Footer } from './components/Footer'
 
-function App() {
+function App({ birds }) {
   return (
     <div>
       <Header />
       <Hero />
-      <Gallery />
+      <Gallery birds={birds} />
       <About />
       <ContactForm />
       <Footer />

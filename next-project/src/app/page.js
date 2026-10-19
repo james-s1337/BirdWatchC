@@ -1,5 +1,22 @@
+import { Suspense } from "react";
 import App from "@/App";
+import { getFeaturedBirds } from "@/lib/birds";
+
+async function BirdWatchPage() {
+  const birds = await getFeaturedBirds();
+  return <App birds={birds} />;
+}
 
 export default function Page() {
-  return <App />;
+  return (
+    <Suspense
+      fallback={
+        <main className="mx-auto w-full max-w-content px-page-gutter py-16 text-muted">
+          Loading featured birds...
+        </main>
+      }
+    >
+      <BirdWatchPage />
+    </Suspense>
+  );
 }
