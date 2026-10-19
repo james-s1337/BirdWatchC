@@ -1,0 +1,25 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #1e2924;
+  --color-muted: #66736c;
+  --color-paper: #f7f8f3;
+  --color-surface: #ffffff;
+  --color-forest: #244a3a;
+  --color-leaf: #66845a;
+  --color-moss: #dce5d4;
+  --color-gold: #d5a94e;
+  --color-line: #e1e6dd;
+  --font-body: "Segoe UI", "Helvetica Neue", sans-serif;
+  --font-display: Georgia, "Times New Roman", serif;
+  --spacing-page-gutter: clamp(1.25rem, 5vw, 4rem);
+  --container-content: 1160px;
+  --breakpoint-sm: 421px;
+  --breakpoint-md: 681px;
+}
+
+@layer base {
+  a:focus-visible {
+    @apply outline-[3px] outline-gold outline-offset-[4px];
+  }
+}
