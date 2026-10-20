@@ -1,10 +1,15 @@
-import { useState } from 'react'
 import Image from 'next/image'
 import { SpottedToggle } from './SpottedToggle'
 
-export function BirdCard({ imageSrc, altText, birdName, location }) {
-    const [isSpotted, setIsSpotted] = useState(false);
-
+export function BirdCard({
+    imageSrc,
+    altText,
+    birdName,
+    location,
+    isSpotted,
+    onSpottedChange,
+    spottedDisabled,
+}) {
     return (
         <article className="group min-w-0 overflow-hidden bg-surface">
             <div className="relative aspect-[5/4] w-full overflow-hidden bg-moss md:aspect-[4/3]">
@@ -18,7 +23,11 @@ export function BirdCard({ imageSrc, altText, birdName, location }) {
             </div>
             <h3 className="mt-[1.1rem] mb-[.15rem] font-display text-[1.35rem] font-normal text-forest">{birdName}</h3>
             <p className="mt-0 mb-5 text-[.9rem] text-muted">Captured in {location}</p>
-            <SpottedToggle value={isSpotted} onChange={setIsSpotted} />
+            <SpottedToggle
+                value={isSpotted}
+                onChange={onSpottedChange}
+                disabled={spottedDisabled}
+            />
         </article>
     );
 }

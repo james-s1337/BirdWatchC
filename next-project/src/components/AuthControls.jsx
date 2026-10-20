@@ -123,6 +123,7 @@ export function AuthControls() {
         setUser(session.user);
         setSessionState("signed-in");
         setIsOpen(false);
+        window.dispatchEvent(new Event("birdwatch:auth-change"));
         return;
       }
 
@@ -157,6 +158,7 @@ export function AuthControls() {
 
       setUser(null);
       setSessionState("signed-out");
+      window.dispatchEvent(new Event("birdwatch:auth-change"));
     } catch (error) {
       setFeedback(getErrorMessage(error, "Unable to sign out. Please try again."));
     } finally {

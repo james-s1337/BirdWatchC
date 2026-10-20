@@ -44,6 +44,8 @@ NEON_AUTH_COOKIE_SECRET="a-random-secret-at-least-32-characters-long"
 
 Get the branch auth URL from the Neon Console. Generate the cookie secret with `openssl rand -base64 32`. Keep both values server-side and do not commit `.env.local`. For deployed environments, configure the same values as server environment variables and add the app's origin to the branch's trusted auth domains.
 
+Spotted-bird selections are stored in the `spotted_birds` table per signed-in user. The tracked migration creates this table; run `npm run db:migrate` when setting up a database or pulling these changes.
+
 ## Validate
 
 ```powershell

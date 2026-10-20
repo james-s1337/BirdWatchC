@@ -1,6 +1,7 @@
 import {
   integer,
   pgTable,
+  primaryKey,
   serial,
   text,
   timestamp,
@@ -23,4 +24,18 @@ export const birds = pgTable(
       .defaultNow(),
   },
   (table) => [uniqueIndex("birds_slug_unique").on(table.slug)],
+);
+
+export const spottedBirds = pgTable(
+  "spotted_birds",
+  {
+    userId: text("user_id").notNull(),
+    birdId: integer("bird_id")
+      .notNull()
+      .references(() => birds.id, { onDelete: "cascade" }),
+    createdAt: timestamp("created_at", { withTimezone: true })
+      .notNull()
+      .defaultNow(),
+  },
+  (table) => [primaryKey({ columns: [table.userId, table.birdId] })],
 );
