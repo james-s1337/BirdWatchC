@@ -31,6 +31,19 @@ npm run db:seed
 
 The seed operation is safe to rerun: it updates seeded records by slug and does not delete other rows. App queries use `DATABASE_URL`; migrations prefer `DATABASE_URL_UNPOOLED`.
 
+## Authentication
+
+The header supports email/password sign-up, sign-in, and sign-out through Neon Managed Auth. The browser talks to the app's `/api/auth` route, and its session is restored from the auth cookie when the page is refreshed.
+
+Enable Managed Auth for the Neon branch used by this app, then configure these private values in `next-project/.env.local`:
+
+```env
+NEON_AUTH_BASE_URL="your-branch-auth-url"
+NEON_AUTH_COOKIE_SECRET="a-random-secret-at-least-32-characters-long"
+```
+
+Get the branch auth URL from the Neon Console. Generate the cookie secret with `openssl rand -base64 32`. Keep both values server-side and do not commit `.env.local`. For deployed environments, configure the same values as server environment variables and add the app's origin to the branch's trusted auth domains.
+
 ## Validate
 
 ```powershell

@@ -1,3 +1,5 @@
+import { AuthControls } from "./AuthControls";
+
 export function Header() {
   return (
     <header className="flex min-h-28 flex-col items-start justify-between gap-3 border-b border-[rgb(30_41_36_/_8%)] bg-paper px-page-gutter pt-5 pb-4 md:min-h-24 md:flex-row md:items-center md:gap-6 md:pt-0 md:pb-0 lg:min-h-20">
@@ -8,6 +10,7 @@ export function Header() {
                 <li><a className="inline-block py-2 text-base font-semibold text-muted no-underline transition-colors duration-[160ms] hover:text-leaf motion-reduce:duration-[.01ms] md:text-base lg:text-[.9rem]" href="#gallery">Gallery</a></li>
                 <li><a className="inline-block py-2 text-base font-semibold text-muted no-underline transition-colors duration-[160ms] hover:text-leaf motion-reduce:duration-[.01ms] md:text-base lg:text-[.9rem]" href="#about">About</a></li>
                 <li><a className="inline-block py-2 text-base font-semibold text-muted no-underline transition-colors duration-[160ms] hover:text-leaf motion-reduce:duration-[.01ms] md:text-base lg:text-[.9rem]" href="#contact-form">Book a Shoot</a></li>
+                <li><AuthControls /></li>
             </ul>
         </nav>
     </header>
