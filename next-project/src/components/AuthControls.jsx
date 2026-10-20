@@ -215,7 +215,7 @@ export function AuthControls() {
         </div>
       ) : (
         <button
-          className="inline-flex min-h-10 items-center justify-center rounded-[2px] border border-forest bg-forest px-4 py-2 text-sm font-bold text-white transition-colors hover:bg-[#193a2c]"
+          className="inline-flex min-h-9 items-center justify-center rounded-full px-2 py-1 text-sm font-bold text-forest transition-colors hover:text-leaf focus-visible:outline-[3px] focus-visible:outline-gold focus-visible:outline-offset-2"
           type="button"
           onClick={() => openDialog("sign-in")}
         >

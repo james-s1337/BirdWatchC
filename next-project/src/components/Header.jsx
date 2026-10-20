@@ -10,7 +10,9 @@ export function Header() {
                 <li><a className="inline-block py-2 text-base font-semibold text-muted no-underline transition-colors duration-[160ms] hover:text-leaf motion-reduce:duration-[.01ms] md:text-base lg:text-[.9rem]" href="#gallery">Gallery</a></li>
                 <li><a className="inline-block py-2 text-base font-semibold text-muted no-underline transition-colors duration-[160ms] hover:text-leaf motion-reduce:duration-[.01ms] md:text-base lg:text-[.9rem]" href="#about">About</a></li>
                 <li><a className="inline-block py-2 text-base font-semibold text-muted no-underline transition-colors duration-[160ms] hover:text-leaf motion-reduce:duration-[.01ms] md:text-base lg:text-[.9rem]" href="#contact-form">Book a Shoot</a></li>
-                <li><AuthControls /></li>
+                <li className="rounded-full border border-[rgb(36_74_58_/_18%)] bg-[#e9eee6] px-3 py-1 shadow-sm">
+                    <AuthControls />
+                </li>
             </ul>
         </nav>
     </header>
