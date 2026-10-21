@@ -1,10 +1,10 @@
 import { and, asc, eq } from "drizzle-orm";
-import { auth } from "@/lib/auth/server";
+import { getAuth } from "@/lib/auth/server";
 import { getDb } from "@/lib/db";
 import { birds, spottedBirds } from "@/lib/db/schema";
 
 async function getAuthenticatedUser() {
-  const { data: session, error } = await auth.getSession();
+  const { data: session, error } = await getAuth().getSession();
 
   if (error) {
     console.error("Unable to retrieve the current auth session.", error);
