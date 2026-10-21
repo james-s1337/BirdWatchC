@@ -2,6 +2,14 @@
 
 This is the Next.js App Router version of the Bird Watch photography site. The featured gallery reads bird records from Neon Postgres; `src/data/birds.js` is the seed data source.
 
+## Site features
+
+- Responsive bird-photography landing page with home, gallery, about, and contact sections.
+- Featured bird gallery with photos, descriptive alt text, capture locations, and category filters.
+- Sign-up, sign-in, and sign-out controls using email and password.
+- Signed-in users can mark birds as spotted; their selections persist to their account and are restored when they return.
+- Contact form opens the visitor's email app with the request details prepared. It does not submit to a site-side booking API.
+
 ## Run locally
 
 ```powershell
@@ -10,6 +18,14 @@ npm run dev
 ```
 
 Open http://localhost:3000.
+
+## Backend functionality
+
+- Neon Postgres stores featured bird records and each user's spotted-bird selections. Drizzle ORM handles database queries.
+- The home page loads featured birds from the database on the server. `GET /api/birds` also returns the featured birds as JSON.
+- `GET /api/spotted` returns the signed-in user's spotted bird IDs. `PUT /api/spotted` adds or removes a sighting, validating the request and bird record. These endpoints require a signed-in user.
+- `GET`, `POST`, `PUT`, `DELETE`, and `PATCH` requests to `/api/auth` are handled by Neon Managed Auth.
+- `src/data/birds.js` contains sample seed records; the site reads its gallery records from the database, not directly from that file.
 
 ## Connect Neon and load the sample birds
 
