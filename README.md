@@ -29,7 +29,7 @@ Open http://localhost:3000.
 
 ## Connect Neon and load the sample birds
 
-Create `next-project/.env.local` with your pooled connection string for app queries and, optionally, the direct connection string for migrations:
+Create `.env.local` in the repository root with your pooled connection string for app queries and, optionally, the direct connection string for migrations:
 
 ```env
 DATABASE_URL="your-pooled-Neon-connection-string"
@@ -51,7 +51,7 @@ The seed operation is safe to rerun: it updates seeded records by slug and does 
 
 The header supports email/password sign-up, sign-in, and sign-out through Neon Managed Auth. The browser talks to the app's `/api/auth` route, and its session is restored from the auth cookie when the page is refreshed.
 
-Enable Managed Auth for the Neon branch used by this app, then configure these private values in `next-project/.env.local`:
+Enable Managed Auth for the Neon branch used by this app, then configure these private values in the root `.env.local`:
 
 ```env
 NEON_AUTH_BASE_URL="your-branch-auth-url"
@@ -69,4 +69,3 @@ npm run lint
 npm run build
 ```
 
-The original Vite app remains in the sibling `../vite-project` directory while this version is being tested.
