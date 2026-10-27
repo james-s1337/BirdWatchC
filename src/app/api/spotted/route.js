@@ -1,25 +1,12 @@
 import { and, asc, eq } from "drizzle-orm";
-import { auth } from "@/lib/auth/server";
+import { requireAuthenticatedUser } from "@/lib/auth/require-user";
 import { getDb } from "@/lib/db";
 import { birds, spottedBirds } from "@/lib/db/schema";
 
-async function getAuthenticatedUser() {
-  const { data: session, error } = await auth.getSession();
-
-  if (error) {
-    console.error("Unable to retrieve the current auth session.", error);
-    return { error: Response.json({ error: "Unable to verify session." }, { status: 500 }) };
-  }
-
-  if (!session?.user) {
-    return { error: Response.json({ error: "Sign in to save spotted birds." }, { status: 401 }) };
-  }
-
-  return { user: session.user };
-}
-
 export async function GET() {
-  const { user, error } = await getAuthenticatedUser();
+  const { user, error } = await requireAuthenticatedUser(
+    "Sign in to save spotted birds.",
+  );
   if (error) {
     return error;
   }
@@ -34,7 +21,9 @@ export async function GET() {
 }
 
 export async function PUT(request) {
-  const { user, error } = await getAuthenticatedUser();
+  const { user, error } = await requireAuthenticatedUser(
+    "Sign in to save spotted birds.",
+  );
   if (error) {
     return error;
   }

@@ -21,7 +21,7 @@
 .hero-background {
   background-image:
     linear-gradient(90deg, rgb(237 241 232 / 75%), rgb(237 241 232 / 8%)),
-    url("/images/birds/bird-home.jpg");
+    url("/images/birds/bird-home.jpg?v=2");
   background-position: center, center 47%;
   background-repeat: no-repeat;
   background-size: auto, cover;

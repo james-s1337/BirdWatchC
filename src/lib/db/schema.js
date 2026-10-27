@@ -23,11 +23,16 @@ export const birds = pgTable(
     altText: text("alt_text").notNull(),
     category: text("category").notNull(),
     imagePath: text("image_path").notNull(),
+    price: integer("price").notNull(),
+    currency: varchar("currency", { length: 3 }).notNull().default("CAD"),
     createdAt: timestamp("created_at", { withTimezone: true })
       .notNull()
       .defaultNow(),
   },
-  (table) => [uniqueIndex("birds_slug_unique").on(table.slug)],
+  (table) => [
+    uniqueIndex("birds_slug_unique").on(table.slug),
+    check("birds_price_positive", sql`${table.price} > 0`),
+  ],
 );
 
 export const spottedBirds = pgTable(
@@ -52,6 +57,7 @@ export const orders = pgTable(
     status: text("status").notNull().default("pending"),
     totalAmount: integer("total_amount").notNull(),
     currency: varchar("currency", { length: 3 }).notNull().default("USD"),
+    stripeSessionId: text("stripe_session_id"),
     createdAt: timestamp("created_at", { withTimezone: true })
       .notNull()
       .defaultNow(),
@@ -59,6 +65,7 @@ export const orders = pgTable(
   },
   (table) => [
     index("orders_user_id_idx").on(table.userId),
+    uniqueIndex("orders_stripe_session_id_unique").on(table.stripeSessionId),
     check("orders_total_amount_nonnegative", sql`${table.totalAmount} >= 0`),
   ],
 );

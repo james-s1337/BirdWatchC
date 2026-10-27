@@ -23,6 +23,8 @@ await database
       altText: bird.alt,
       category: bird.category,
       imagePath: bird.image,
+      price: Math.floor(Math.random() * 501) + 1500,
+      currency: "CAD",
     })),
   )
   .onConflictDoUpdate({

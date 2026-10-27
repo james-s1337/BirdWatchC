@@ -24,6 +24,7 @@ Open http://localhost:3000.
 - Neon Postgres stores featured bird records and each user's spotted-bird selections. Drizzle ORM handles database queries.
 - The home page loads featured birds from the database on the server. `GET /api/birds` also returns the featured birds as JSON.
 - `GET /api/spotted` returns the signed-in user's spotted bird IDs. `PUT /api/spotted` adds or removes a sighting, validating the request and bird record. These endpoints require a signed-in user.
+- `POST /api/checkout` requires a signed-in user and a `birdId`; it reads the bird's stored price and currency, creates a pending order, then returns a Stripe Checkout URL. Prices are randomized once per seeded bird between CAD $15.00 and $20.00 and stored in cents; reseeding existing birds preserves their prices. Never send or trust a browser-provided price.
 - `GET`, `POST`, `PUT`, `DELETE`, and `PATCH` requests to `/api/auth` are handled by Neon Managed Auth.
 - `src/data/birds.js` contains sample seed records; the site reads its gallery records from the database, not directly from that file.
 
@@ -47,6 +48,17 @@ npm run db:seed
 
 The seed operation is safe to rerun: it updates seeded records by slug and does not delete other rows. App queries use `DATABASE_URL`; migrations prefer `DATABASE_URL_UNPOOLED`.
 
+## Checkout
+
+Set these server-only values in `.env.local` to enable Stripe Checkout:
+
+```env
+STRIPE_SECRET_KEY="your-Stripe-secret-key"
+APP_URL="http://localhost:3000"
+```
+
+Use the HTTPS origin of your deployed app for `APP_URL` in production. Apply database migrations and seed the birds before using checkout. Send `POST /api/checkout` with JSON such as `{"birdId":1}`; the response contains `checkoutUrl` and `orderId`. The order is associated with the authenticated Neon user and the server-side bird price. Orders remain pending until a Stripe webhook is added to confirm payment.
+
 ## Authentication
 
 The header supports email/password sign-up, sign-in, and sign-out through Neon Managed Auth. The browser talks to the app's `/api/auth` route, and its session is restored from the auth cookie when the page is refreshed.
@@ -68,4 +80,3 @@ Spotted-bird selections are stored in the `spotted_birds` table per signed-in us
 npm run lint
 npm run build
 ```
-
