@@ -53,11 +53,20 @@ The seed operation is safe to rerun: it updates seeded records by slug and does 
 Set these server-only values in `.env.local` to enable Stripe Checkout:
 
 ```env
-STRIPE_SECRET_KEY="your-Stripe-secret-key"
+STRIPE_SECRET_KEY="sk_test_..."
+STRIPE_WEBHOOK_SECRET="whsec_..."
 APP_URL="http://localhost:3000"
 ```
 
-Use the HTTPS origin of your deployed app for `APP_URL` in production. Apply database migrations and seed the birds before using checkout. Send `POST /api/checkout` with JSON such as `{"birdId":1}`; the response contains `checkoutUrl` and `orderId`. The order is associated with the authenticated Neon user and the server-side bird price. Orders remain pending until a Stripe webhook is added to confirm payment.
+Use the HTTPS origin of your deployed app for `APP_URL` in production. Apply database migrations and seed the birds before using checkout. Each bird card's **Order now** button sends the bird ID to `POST /api/checkout`; the server reads the price from the database, creates a pending order, and redirects the signed-in user to Stripe Checkout.
+
+For local webhook testing, install and sign in to the [Stripe CLI](https://docs.stripe.com/stripe-cli), then run:
+
+```powershell
+stripe listen --forward-to localhost:3000/api/webhooks/stripe
+```
+
+Copy the `whsec_...` signing secret printed by `stripe listen` into `STRIPE_WEBHOOK_SECRET` in `.env.local`, then restart the Next.js dev server. Use Stripe test-mode API keys, sign in to the site, and place an order. Complete the hosted Checkout page with test card `4242 4242 4242 4242`, any future expiry date, and any CVC. Stripe sends the signed event to the local webhook; only a verified, paid Checkout Session matching the pending order can mark it paid. Keep the Stripe CLI listener running while testing and never expose either secret in client-side code or commit them.
 
 ## Authentication
 

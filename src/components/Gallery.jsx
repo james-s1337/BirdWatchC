@@ -11,6 +11,8 @@ export function Gallery({ birds }){
     const [spottedStatus, setSpottedStatus] = useState('loading')
     const [spottedMessage, setSpottedMessage] = useState('')
     const [savingBirdIds, setSavingBirdIds] = useState(() => new Set())
+    const [checkoutMessage, setCheckoutMessage] = useState('')
+    const [checkoutBirdIds, setCheckoutBirdIds] = useState(() => new Set())
     const filteredBirds = filter === 'all' ? birds : birds.filter(bird => bird.category === filter)
 
     useEffect(() => {
@@ -105,6 +107,41 @@ export function Gallery({ birds }){
         }
     }
 
+    async function startCheckout(birdId) {
+        setCheckoutMessage('')
+        setCheckoutBirdIds((current) => new Set(current).add(birdId))
+
+        try {
+            const response = await fetch('/api/checkout', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ birdId }),
+            })
+            const result = await response.json()
+
+            if (!response.ok) {
+                throw new Error(
+                    response.status === 401
+                        ? 'Sign in before ordering.'
+                        : result.error || 'Unable to start checkout.',
+                )
+            }
+
+            if (typeof result.checkoutUrl !== 'string') {
+                throw new Error('Checkout did not return a Stripe URL.')
+            }
+
+            window.location.assign(result.checkoutUrl)
+        } catch (error) {
+            setCheckoutMessage(error.message || 'Unable to start checkout.')
+            setCheckoutBirdIds((current) => {
+                const updated = new Set(current)
+                updated.delete(birdId)
+                return updated
+            })
+        }
+    }
+
     return (
         <section id="gallery" className="mx-auto w-full max-w-content px-page-gutter py-[clamp(4rem,8vw,6.5rem)]">
             <h2 className="mb-8 font-display text-[clamp(2rem,4vw,3.1rem)] font-normal leading-[1.15] tracking-[-.045em] text-forest">This Week&apos;s Featured Birds</h2>
@@ -116,6 +153,11 @@ export function Gallery({ birds }){
             {spottedMessage && (
                 <p className="mb-5 mt-0 text-sm text-red-800" role="alert">
                     {spottedMessage}
+                </p>
+            )}
+            {checkoutMessage && (
+                <p className="mb-5 mt-0 text-sm text-red-800" role="alert">
+                    {checkoutMessage}
                 </p>
             )}
             <div className="mb-8 flex flex-wrap gap-2">
@@ -143,6 +185,10 @@ export function Gallery({ birds }){
                         altText={bird.alt}
                         birdName={bird.name}
                         location={bird.location}
+                        price={bird.price}
+                        currency={bird.currency}
+                        onOrder={() => startCheckout(bird.id)}
+                        ordering={checkoutBirdIds.has(bird.id)}
                         isSpotted={spottedBirdIds.has(bird.id)}
                         onSpottedChange={(spotted) => updateSpotted(bird.id, spotted)}
                         spottedDisabled={

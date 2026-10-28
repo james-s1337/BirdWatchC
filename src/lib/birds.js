@@ -11,6 +11,8 @@ export function getFeaturedBirds() {
       alt: birds.altText,
       category: birds.category,
       image: birds.imagePath,
+      price: birds.price,
+      currency: birds.currency,
     })
     .from(birds)
     .orderBy(asc(birds.position), asc(birds.id));
