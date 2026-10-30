@@ -1,4 +1,4 @@
-# Bird Watch C (Next.js)
+# Bird Watch C (Next.js) -> https://birdwatchc.netlify.app/
 
 This is the Next.js App Router version of the Bird Watch photography site. The featured gallery reads bird records from Neon Postgres; `src/data/birds.js` is the seed data source.
 
