@@ -129,7 +129,7 @@ export async function POST(request) {
         orderId: String(order.id),
         userId: user.id,
       },
-      success_url: `${appUrl}/?checkout=success&session_id={CHECKOUT_SESSION_ID}`,
+      success_url: `${appUrl}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${appUrl}/?checkout=cancel`,
     });
   } catch (stripeError) {
